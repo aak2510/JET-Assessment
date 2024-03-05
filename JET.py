@@ -1,42 +1,43 @@
 import requests
 from tabulate import tabulate
 
-
 def call_api(postcode):
+    """Calling/Consuming the API and checks to see that the response received was successful. If not, an error message is displayed and the program ends."""
 
-    # Calling api with formatted string
+    # Format endpoint string with postcode arguement and create custom header with user agent information so that we can bypass "403 forbidden error"
     url = f"https://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/{postcode}"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
     }
+
+    # make a call to the API
     response = requests.get(url, headers=headers)
 
-
-    # response object could be "None" or calling Json() could fail, so we try and serialise the response. 
-    try:
+    # If block handle successful calls to the API, else block handles errors.
+    if response.status_code == 200:
+        # Serialise to json after ensuring a successful call
         data = response.json()
-
         # if there is a successful response (HTTP code 200), we can then check to make sure the server hasn't sent back empty data (which is the case with invalid postcode input)
         # This can be checked by looking at the resultCount value withint he servers response
-        if response.status_code == 200:
-            if data['metaData']['resultCount'] > 0:
-                # if we have data to return, we return the first 10 restaurants
-                return data["restaurants"][:10]
-            else:
-                # if there is not restaurant returned, it means we entered the postcode incorrectly or there is nothing being served in this area. 
-                print("There are no Restaurants currently serving within this postcode.")
-                return
+        if data['metaData']['resultCount'] > 0:
+            # if we have data to return, we return the first 10 restaurants
+            return data["restaurants"][:10]
         else:
-            # If the response was able to serialise but the HTTP status code indicates an error, then we need to handle it
+            # if there is not restaurant returned, it means we entered the postcode incorrectly or there is nothing being served in this area. 
+            print("There are no Restaurants currently serving within this postcode.\n\n")
+            return
+    # (ERROR handling) If the call to the API was unsuccessful, we return/print information about that error 
+    else:
+        try:
+           # If the response was able to serialise but the HTTP status code indicates an error, then we need to handle it
             # API endpoint/Server responds with Json object for some erroneous status' such as 401, 429, 500.
             # If it does, this contains an error code and description we will try to access and print.
-            print(f"Error code: {data["errors"]["errorCode"]}\nReason: {data["errors"]["description"]}")
-    except:
-        # If the json serialisation fails, which can happen if there is, for example, a 402 error with no content, 
+            errorResponse = response.json()["errors"]
+            print(f"Error code: {errorResponse["errorCode"]}.\nReason: {errorResponse["description"]}.\n\n")
+        except:
+           # If the json serialisation fails, which can happen if there is, for example, a 402 error with no content, 
         # then we can return the error code and reason using the requests library
-        print(f"{response.status_code} ERROR .\nReason: {response.reason}")
-
-    
+            print(f"Error code: {response.status_code}.\nReason: {response.reason}.\n\n")
 
 
 def format_response_data(data):
