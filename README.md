@@ -1,6 +1,6 @@
 # JET Assessment README
 
-This Python script interacts with the Just Eat API to retrieve restaurant data based on a user-provided postcode. The information is then formatted and presented in a table, displaying key details about the restaurants as mentioned in the assessment brief (Name, Cuisines, Rating - as a number, Address). The script allows users to input postcodes and view relevant restaurant information in an organized manner. This data displayed is restricted to show the first 10 restaurants returned by the initial API call.
+This Python script interacts with the Just Eat API to retrieve restaurant data based on a user-provided postcode. The information is then formatted and presented in a table, displaying key details about the restaurants as mentioned in the assessment brief (Name, Cuisines, Rating - as a number, Address). The script allows users to input postcodes and view relevant restaurant information in an organised manner. This data displayed is restricted to show the first 10 restaurants returned by the initial API call.
 
 ## Why a Table Format?
 The choice to present the information in a table format was deliberate, aiming to enhance user experience in the following ways:
