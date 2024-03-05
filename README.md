@@ -43,7 +43,7 @@ pip install requests tabulate
 
 2. Run the script:
    ```bash
-   python restaurant_display.py
+   python JET.py
    ```
 
 3. Follow the prompts to enter a postcode or 'q' to quit the program.
