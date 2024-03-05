@@ -53,17 +53,8 @@ There is also an executable file which was created using pyinstaller.
 **WARNING** 
 Users must note that this executable does not have a digital signature. If you have an anti-virus implemented it will ask you if you trust this application, I can assure you no harm will come to you from this, but feel free NOT to use this method. I am not responsible for anything that comes after running this application as it was built for the sole purpose of the assessment.
  
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/aak2510/JET-Aessement.git
-   cd JET-Assessment/dist
-   ```
-
-2. Run the script:
-   ```bash
-   ./JET.exe
-   ```
-
+1. Download the executable file from the Releases section.
+2. Double-click the executable file (`restaurant_display.exe`).
 3. Follow the prompts to enter a postcode or 'q' to quit the program.
 
 
