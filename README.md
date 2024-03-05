@@ -37,7 +37,7 @@ pip install requests tabulate
 #### Option 1: Run the Python Script
 1. Clone the repository:
    ```bash
-   git clone https://github.com/aak2510/JET-Assessement.git
+   git clone https://github.com/aak2510/JET-Assessment.git
    cd JET-Assessment
    ```
 
